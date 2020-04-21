@@ -1,0 +1,11 @@
+{
+  "name": "lab-6",
+  "version": "1.0.0",
+  "description": "Mahir Dhall Lab 6",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mahir Dhall",
+  "license": "ISC"
+}
