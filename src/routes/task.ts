@@ -11,7 +11,7 @@ export class Tasks {
         /**
          * To Create a new task with given details in the body
          */
-        app.route("/tasks").post(async (req: Request, res: Response) => {
+        app.route("/api/tasks").post(async (req: Request, res: Response) => {
 
             const newTask = req.body;
             try {
@@ -42,7 +42,7 @@ export class Tasks {
         /**
  * To get task by the given id
  */
-        app.route("/tasks/:id").get(async (req: Request, res: Response) => {
+        app.route("/api/tasks/:id").get(async (req: Request, res: Response) => {
 
 
             try {
@@ -66,7 +66,7 @@ export class Tasks {
         * To get all task in the database
         */
         
-        app.route("/tasks").get(async (req: Request, res: Response) => {
+        app.route("/api/tasks").get(async (req: Request, res: Response) => {
             let skippy:string = req.query.skip as string;
             let takey:string = req.query.take as string
             if (skippy && takey) {
@@ -190,7 +190,7 @@ export class Tasks {
         /*
         To update a task by the given id
         */
-        app.route("/tasks/:id").put(async (req: Request, res: Response) => {
+        app.route("/api/tasks/:id").put(async (req: Request, res: Response) => {
 
 
 
@@ -232,7 +232,7 @@ export class Tasks {
         * To add a new comment on task by id
         */
 
-        app.route("/tasks/:id/comments").post(async (req: Request, res: Response) => {
+        app.route("/api/tasks/:id/comments").post(async (req: Request, res: Response) => {
 
 
             try {
@@ -264,7 +264,7 @@ export class Tasks {
         /*
         To delete a comment with comment id in task id
         */
-        app.route("/tasks/:taskId/:commentId").delete(async (req: Request, res: Response) => {
+        app.route("/api/tasks/:taskId/:commentId").delete(async (req: Request, res: Response) => {
 
             try {
                 if (!req.params.taskId) {
@@ -285,7 +285,7 @@ export class Tasks {
         })
 
 
-        app.route("/tasks/:id").patch(async (req:Request, res:Response) => {
+        app.route("/api/tasks/:id").patch(async (req:Request, res:Response) => {
             try {
                 if (!req.params.id) {
                     throw `Please provide a task id to update`;

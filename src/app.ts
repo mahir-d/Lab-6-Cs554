@@ -1,8 +1,9 @@
 import * as express from 'express';
+import { Request, Response } from 'express';
 import * as bodyParser from 'body-parser'; //used to parse the form data that you pass in the request
 import { Tasks } from './routes/task';
-var totalRequests: number = 0;
-var dict: object = {};
+var urlObj = {};
+
 class App {
     public app: express.Application;
     public taskRoutes: Tasks = new Tasks();
@@ -11,10 +12,13 @@ class App {
         this.app = express(); //run the express instance and store in app
         this.config();
         this.taskRoutes.routes(this.app);
+        this.app.use("*", (req:Request, res:Response) => {
+            res.status(404).json({ error: "Page not found" });
+        });
     }
-
+    
     Logger = (req: express.Request, res: express.Response, next: Function) => {
-        var urlObj = {};
+        
         console.log(`${JSON.stringify(req.body)} ${req.url} ${req.method}`);
         let currUrl = req.url;
         if (!urlObj[currUrl]) {
