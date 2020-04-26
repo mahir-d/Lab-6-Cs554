@@ -13,15 +13,23 @@ class App {
         this.taskRoutes.routes(this.app);
     }
 
-    // Logger = (req: express.Request, res: express.Response, next: Function) => {
-    //     //middleware here
-    //     totalRequests++;
-    //     console.log(`There has been ${totalRequests} requests made to the server`);
-    //     console.log('The last request came from: ' + req.protocol + '://' + req.get('host') + req.originalUrl);
-    //     next();
-    // };
+    Logger = (req: express.Request, res: express.Response, next: Function) => {
+        var urlObj = {};
+        console.log(`${JSON.stringify(req.body)} ${req.url} ${req.method}`);
+        let currUrl = req.url;
+        if (!urlObj[currUrl]) {
+            urlObj[currUrl] = 1;
+        }
+        else {
+            let value = urlObj[currUrl];
+            urlObj[currUrl] = value + 1;
+        }
+        console.log("URL: " + JSON.stringify(urlObj));
+        next();
+    };
 
-    
+
+
 
     private config(): void {
         // support application/json type post data
@@ -32,7 +40,8 @@ class App {
                 extended: false
             })
         );
-        // this.app.use(this.Logger);
+
+        this.app.use(this.Logger);
     }
 }
 
